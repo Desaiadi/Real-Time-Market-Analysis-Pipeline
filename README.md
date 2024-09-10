@@ -51,21 +51,16 @@ This project implements a real-time data analysis pipeline designed for processi
 ![Architecture](Architecture/Architecture.jpg)
 
 ## Getting Started
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/real-time-data-analysis-pipeline.git
-   ```
    
-2. **Set Up Kafka**: Install and configure Kafka to handle message streaming from the data producer.
+1. **Set Up Kafka**: Install and configure Kafka to handle message streaming from the data producer.
    
-3. **Configure Spark Streaming**: Set up Apache Spark to connect with Kafka, Cassandra, and MySQL for processing and data storage.
+2. **Configure Spark Streaming**: Set up Apache Spark to connect with Kafka, Cassandra, and MySQL for processing and data storage.
 
-4. **Database Setup**:
+3. **Database Setup**:
    - **Cassandra**: Set up keyspaces and tables for raw data.
    - **MySQL**: Define schemas for structured data storage.
    
-5. **Deploy Superset**: Install and configure Superset to connect with MySQL for real-time data visualization.
+4. **Deploy Superset**: Install and configure Superset to connect with MySQL for real-time data visualization.
 
 ## Usage
 
