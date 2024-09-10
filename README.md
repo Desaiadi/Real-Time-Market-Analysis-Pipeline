@@ -48,7 +48,7 @@ This project implements a real-time data analysis pipeline designed for processi
 - **Apache Superset**: Data visualization and dashboarding tool.
 
 ## Architecture:
-![Architecture](http://url/to/img.png)
+![Architecture](Architecture/Architecture.jpg)
 
 ## Getting Started
 
