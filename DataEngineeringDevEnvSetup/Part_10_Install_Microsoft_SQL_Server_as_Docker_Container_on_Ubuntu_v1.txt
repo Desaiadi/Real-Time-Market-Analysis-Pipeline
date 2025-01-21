@@ -1,0 +1,52 @@
+Install Microsoft SQL Server as Docker Container on Ubuntu:
+===========================================================
+
+Step 1: Pull the SQL Server 2022 (16.x) Linux container image from the Microsoft Container Registry.
+
+sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+
+Step 2: To run the Linux container image with Docker, you can use the following command
+
+sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Welcome123$" \
+   -p 1433:1433 --name datamakingsqlserver1 --hostname datamakingsqlserver1 \
+   -d \
+   mcr.microsoft.com/mssql/server:2022-latest
+   
+
+
+Your password should follow the SQL Server default password policy, otherwise the container can't set up SQL Server and will stop working. By default, the password must be at least eight characters long and contain characters from three of the following four sets: uppercase letters, lowercase letters, base-10 digits, and symbols. 
+
+
+
+Step 3: To view your Docker containers, use the docker ps command.
+
+sudo docker ps -a
+
+
+Step 4: Connect to SQL Server
+
+Use the docker exec -it command to start an interactive bash shell inside your running container. In the following example sql1 is name specified by the --name parameter when you created the container.
+
+sudo docker exec -it datamakingsqlserver1 bash
+
+
+Once inside the container, connect locally with sqlcmd, using its full path.
+
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Welcome123$"
+
+
+Create a new database
+
+
+CREATE DATABASE TestDB;
+
+GO
+
+SELECT Name from sys.databases;
+
+GO
+
+QUIT
+
+

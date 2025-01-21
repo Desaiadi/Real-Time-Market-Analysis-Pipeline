@@ -1,0 +1,26 @@
+Install Visual Studio Code on Ubuntu:
+=====================================
+
+Step 1: Download the Visual Studio Code installer file
+
+Url: 
+
+https://code.visualstudio.com/download
+
+
+code_1.83.1-1696982868_amd64.deb
+
+
+Step 2: Install the Visual Studio Code IDE
+
+
+sudo dpkg -i code_1.83.1-1696982868_amd64.deb
+
+
+Step 3: Verify the Visual Studio Code version
+
+Open the Visual Studio Code IDE
+
+Click on the "Help" menu and then click on "About"
+
+

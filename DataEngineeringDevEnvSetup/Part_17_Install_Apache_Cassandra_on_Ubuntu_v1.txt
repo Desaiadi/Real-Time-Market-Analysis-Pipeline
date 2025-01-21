@@ -1,0 +1,115 @@
+Install Apache Cassandra on Ubuntu:
+===================================
+
+Step 1: Prerequisite
+
+Java need to installed on the machine where you want to install Apache Cassandra.
+
+echo $JAVA_HOME
+
+To verify that you have the correct version of java installed, type below command:
+
+java -version
+
+
+For using cqlsh, the latest version of Python 3.7+ need to installed on the machine where you want to install Apache Cassandra.
+
+To verify that you have the correct version of Python installed, type below command:
+
+python --version
+
+
+Step 2: Installing the Apache Cassandra using Debian packages
+
+
+Install this if required,
+
+sudo apt-get install software-properties-common
+
+
+Add the Apache repository of Cassandra to the file cassandra.sources.list.
+
+
+echo "deb https://debian.cassandra.apache.org 41x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list 
+
+
+
+Add the Apache Cassandra repository keys to the list of trusted keys on the server:
+
+curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+
+
+Update the package index from sources:
+
+sudo apt-get update
+
+
+Install Cassandra with APT:
+
+sudo apt-get install cassandra
+
+
+Monitor the progress of the startup with:
+
+
+/var/log/cassandra/
+
+tail -f /var/log/cassandra/system.log
+
+
+Step 3: Check the status of Cassandra:
+
+
+sudo systemctl status cassandra
+
+sudo systemctl enable cassandra
+
+sudo systemctl start cassandra
+
+
+nodetool status
+
+
+The status column in the output should report UN which stands for "Up/Normal".
+
+
+sudo netstat -tulpn | grep 9042
+
+pip install cqlsh
+
+
+Alternatively, connect to the database with:
+
+cqlsh
+
+
+SELECT * FROM system_schema.keyspaces;
+
+
+Step 4: Working with Apache Cassandra
+
+
+CREATE KEYSPACE
+
+CREATE KEYSPACE social_media_ks WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+  
+The USE command sets the current working keyspace:
+
+USE social_media_ks;  
+
+
+CREATE TABLE
+
+CREATE TABLE users (id INT PRIMARY KEY, name TEXT, email TEXT, phone INT);
+                   
+                   
+INSERT row/data into TABLE
+
+INSERT INTO users (id, name, email, phone) VALUES (1, 'John', 'john@gmail.com', 456123789);
+
+
+select * from users;
+
+
+

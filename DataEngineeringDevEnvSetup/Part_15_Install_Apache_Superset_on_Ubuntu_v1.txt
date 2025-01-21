@@ -1,0 +1,85 @@
+Install Apache Superset on Ubuntu:
+==================================
+
+
+Prerequisite
+
+Anaconda Python or classic(open source) Python 3.7+ to be installed
+
+python --version
+
+ls /home/datamaking/anaconda3
+
+
+Step 1: Install below list of packages
+
+sudo apt-get install build-essential libssl-dev libffi-dev python3-dev python3-pip libsasl2-dev libldap2-dev default-libmysqlclient-dev
+
+sudo apt-get install python3-setuptools
+
+pip3 install --upgrade pip
+
+
+Make sure we have the latest version of pip and setuptools:
+
+pip install --upgrade setuptools pip
+
+
+Step 2: Create Python Virtual Environment to install Apache Superset on this
+
+
+python -m venv supersetvenv
+
+Activate Python Virtual Environment "supersetvenv"
+
+source supersetvenv/bin/activate
+
+pip install Pillow
+
+
+Step 3: Installing and Initializing Superset
+
+Command to install apache-superset:
+
+pip install apache-superset
+
+
+export FLASK_APP=superset
+
+Generate secret key for superset
+
+openssl rand -base64 42
+
+export SUPERSET_SECRET_KEY=SP8lhgc2rAYjDnCWVirc0jwHDQc0d0rP97X9qArNgMG4zAq/pQ8UlCS0
+
+
+Command to initialize the database:
+
+superset db upgrade
+
+
+Step 4: Run the below commands to complete the installation
+
+# Create an admin user in your metadata database (use `admin` as username to be able to load the examples)
+
+superset fab create-admin
+
+
+# Load some data to play with
+superset load_examples
+
+
+# Create default roles and permissions
+superset init
+
+
+# To start a development web server on port 8099, use -p to bind to another port
+
+superset run -p 8099 --with-threads --reload --debugger
+
+
+Step 5: Open below url in the browser
+
+http://localhost:8099
+
+

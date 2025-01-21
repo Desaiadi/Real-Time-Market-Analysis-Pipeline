@@ -1,0 +1,100 @@
+Install Apache NiFi on Ubuntu:
+===============================
+
+Step 1: Prerequisite
+
+Java need to installed on the machine where you want to install Apache NiFi.
+
+echo $JAVA_HOME
+
+java -version
+
+
+Step 2: Download Apache NiFi software/framework
+
+Url: https://nifi.apache.org/download.html
+
+Select NiFi Binary from Binaries
+
+
+https://www.apache.org/dyn/closer.lua?path=/nifi/1.23.2/nifi-1.23.2-bin.zip
+
+
+Download NiFi using below link
+
+https://dlcdn.apache.org/nifi/1.23.2/nifi-1.23.2-bin.zip
+
+
+wget https://dlcdn.apache.org/nifi/1.23.2/nifi-1.23.2-bin.zip
+
+
+Step 3: Move the NiFi binary file to software(your preferred) location
+
+
+mv nifi-1.23.2-bin.zip /home/datamaking/workarea/software/
+
+
+Extract the binary file
+
+
+unzip nifi-1.23.2-bin.zip
+
+
+Step 4: Configure Apache NiFi
+
+
+cd nifi-1.23.2
+
+ls
+
+
+ls -lrt bin/
+
+
+ls -lrt conf/
+
+
+Open the nifi.properties file and check some of the default settings.
+
+nano conf/nifi.properties
+
+.
+.
+
+nifi.web.http.host=
+nifi.web.http.port=
+nifi.web.http.network.interface.default=
+
+#############################################
+
+nifi.web.https.host=127.0.0.1
+nifi.web.https.port=8443
+
+.
+.
+
+
+Step 5: Start Apache NiFi
+
+
+bin/nifi.sh start
+
+
+Access Atart Apache NiFi using below url
+
+https://127.0.0.1:8443/nifi
+
+
+Run the below command to find a username and password for Apache NiFi
+
+grep Generated logs/nifi-app*log
+
+
+cd logs
+
+cat nifi-app.log | grep "Generated"
+
+Generated Username [9a4eb78c-b98c-42af-9559-34122faaea83]
+Generated Password [4J1RbxLSnuGmTxC1SlOhVNoQF8HpeBeT]
+
+

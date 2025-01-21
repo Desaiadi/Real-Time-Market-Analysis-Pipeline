@@ -1,0 +1,38 @@
+Pull Ubuntu Docker Image and Run as Docker Container on Ubuntu:
+===============================================================
+
+Step 1: Verify the Docker version
+
+sudo docker --version
+
+
+Step 2: Pull Ubuntu Docker Image
+
+
+sudo docker pull ubuntu
+
+
+Step 3: Create and Run Ubuntu as Docker Container
+
+
+sudo docker run --name my_ubuntu_container_1 ubuntu 
+
+
+sudo docker run --name my_ubuntu_container_2 -it ubuntu
+
+
+sudo docker run --name my_ubuntu_container_3 -it -d ubuntu
+
+
+or 
+
+
+sudo docker run --name my_ubuntu_container_4 -it ubuntu tail -f /dev/null
+
+
+sudo docker exec -it <<container_id>> bash
+
+
+sudo docker exec -it 1cf2272cf9ff bash
+
+

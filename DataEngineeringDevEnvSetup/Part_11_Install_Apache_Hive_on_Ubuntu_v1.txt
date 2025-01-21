@@ -1,0 +1,279 @@
+Install Apache Hive on Ubuntu:
+==============================
+
+
+Step 1: Download Apache Hive
+
+https://hive.apache.org/downloads.html
+
+Click on "Download a release now!" hyperlink
+
+Click on "https://dlcdn.apache.org/hive/" hyperlink
+
+Click on "hive-3.1.3/" hyperlink
+
+
+apache-hive-3.1.3-bin.tar.gz
+
+
+https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz
+
+
+wget https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz
+
+ls
+
+apache-hive-3.1.3-bin.tar.gz
+
+
+Copy apache-hive-3.1.3-bin.tar.gz file into /home/datamaking/workarea/software/ directory
+
+
+ls /home/datamaking/workarea/software/
+
+
+mv apache-hive-3.1.3-bin.tar.gz /home/datamaking/workarea/software/
+
+
+cd /home/datamaking/workarea/software/
+
+ls
+
+tar -xvzf apache-hive-3.1.3-bin.tar.gz
+
+
+Step 2: Add the HIVE_HOME path in the bash file (.bashrc)
+
+nano ~/.bashrc
+
+export HIVE_HOME=/home/datamaking/workarea/software/apache-hive-3.1.3-bin
+export HIVE_CONF_DIR=/home/datamaking/workarea/software/apache-hive-3.1.3-bin/conf
+export PATH=$HIVE_HOME/bin:$PATH
+
+
+source ~/.bashrc
+
+
+Step 3: Create "warehouse" directory in HDFS
+
+Use below HDFS commands to create /tmp and /user/hive/warehouse (aka hive.metastore.warehouse.dir) and set them chmod 777 before you can create a table in Hive.
+
+Check HDFS processes are running,
+
+jps
+
+start-dfs.sh
+
+jps
+
+hdfs dfs -mkdir /tmp
+
+hdfs dfs -chmod 777 /tmp
+
+hdfs dfs -mkdir -p /user/hive/warehouse
+
+hdfs dfs -chmod 777 /user/hive/warehouse
+
+
+Step 4: Configure Hive with MySQL as Metastore
+
+
+Install MySQL and configure root user
+
+FYI. Refer my previous video for MySQL installation
+
+
+sudo systemctl status mysql
+
+
+sudo systemctl stop mysql
+
+sudo systemctl start mysql
+
+sudo systemctl status mysql
+
+
+
+sudo mysql -u root -p
+
+CREATE DATABASE metastore;
+
+USE metastore;
+
+CREATE USER 'hive'@'%' IDENTIFIED BY 'datamaking';
+
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+exit;
+
+
+Configure hive-site.xml in ${HIVE_HOME}/conf/
+
+ls ${HIVE_HOME}/conf/
+
+cd ${HIVE_HOME}/conf/
+
+nano hive-site.xml
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<configuration>
+	<!-- WARNING!!! This file is auto generated for documentation purposes ONLY! -->
+	<!-- WARNING!!! Any changes you make to this file will be ignored by Hive.   -->
+	<!-- WARNING!!! You must make your changes in hive-site.xml instead.         -->
+	<!-- Hive Execution Parameters -->
+	<property>
+		<name>javax.jdo.option.ConnectionURL</name>
+		<value>jdbc:mysql://localhost/metastore?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useSSL=false</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionDriverName</name>
+		<value>com.mysql.cj.jdbc.Driver</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionUserName</name>
+		<value>hive</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionPassword</name>
+		<value>datamaking</value>
+	</property>
+	<property>
+		<name>datanucleus.autoCreateSchema</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>datanucleus.fixedDatastore</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>datanucleus.autoCreateTables</name>
+		<value>True</value>
+	</property>
+	<property>
+		<name>hive.server2.transport.mode</name>
+		<value>http</value>
+	</property>
+	<property>
+		<name> hive.server2.thrift.http.port </name>
+		<value>10000</value>
+	</property>
+	<property>
+		<name>hive.server2.http.endpoint</name>
+		<value>cliservice</value>
+	</property>
+</configuration>
+
+
+Installing the MySQL JDBC Driver
+
+
+Download the MySQL JDBC driver from below link
+
+https://dev.mysql.com/downloads/connector/j/ (in .tar.gz format).
+
+pwd
+
+
+cd ../..
+
+pwd
+
+wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-8.1.0.tar.gz
+
+ls
+
+tar -xvzf mysql-connector-j-8.1.0.tar.gz
+
+ls
+
+ls /usr/share/java/
+
+Copy the JDBC driver, renamed, to /usr/share/java/. 
+
+If the target directory does not yet exist, create it. 
+For example:
+
+sudo mkdir -p /usr/share/java/
+
+cd mysql-connector-j-8.1.0
+
+sudo cp mysql-connector-j-8.1.0.jar /usr/share/java/mysql-connector-java.jar
+
+
+sudo cp mysql-connector-j-8.1.0.jar /home/datamaking/workarea/software/apache-hive-3.1.3-bin/lib/mysql-connector-java.jar
+
+
+Create Hive schema (MySQL)
+
+ls ${HIVE_HOME}/bin/schematool
+
+${HIVE_HOME}/bin/schematool -initSchema -dbType mysql
+
+
+FYI.
+
+0: jdbc:mysql://localhost/metastore> !closeall
+Closing: 0: jdbc:mysql://localhost/metastore?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+beeline> 
+beeline> Initialization script completed
+schemaTool completed
+(base) datamaking@datamakingws:~/workarea/software/mysql-connector-j-8.1.0$ 
+
+
+Upgrade metastore database in mysql (Optional)
+
+cd ${HIVE_HOME}/scripts/metastore/upgrade/mysql/
+
+mysql -u root -p
+
+USE metastore;
+
+source hive-schema-3.1.0.mysql.sql;
+
+exit;
+
+
+nohup hive --service metastore &
+
+
+nohup hive --service hiveserver2 &
+
+
+Verify port no
+
+netstat -an | grep 9083
+
+sudo apt install net-tools
+
+open Hive CLI
+
+hive
+
+show databases;
+
+show tables;
+
+
+Hiveserver2 Web UI:
+
+http://localhost:10002/
+

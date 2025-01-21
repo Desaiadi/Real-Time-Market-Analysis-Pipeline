@@ -1,0 +1,41 @@
+Install PyCharm Community Edition on Ubuntu:
+============================================
+
+Step 1: Download the PyCharm Community Edition binary file
+
+Url: 
+
+https://www.jetbrains.com/pycharm/download/?section=linux
+
+pycharm-community-2023.2.3.tar.gz
+
+
+Step 2: Install the PyCharm Community Edition
+
+Extract the PyCharm Community Edition binary file
+
+ls
+
+tar -xvzf pycharm-community-2023.2.3.tar.gz
+
+ls
+
+cd pycharm-community-2023.2.3/
+
+ls
+
+cd bin/
+
+ls
+
+./pycharm.sh
+
+
+Step 3: Verify the PyCharm Community Edition version
+
+Open the PyCharm Community Edition IDE
+
+Click on the "Help" menu and then click on "About"
+
+
+

@@ -1,0 +1,104 @@
+How to install PostgreSQL on Ubuntu 22.04 | RDBMS | Database Software | Part 9 | DM | DataMaking
+
+Install PostgreSQL on Ubuntu:
+=============================
+
+Step 1: Update package index:
+
+sudo apt update
+
+
+Step 2: Install PostgreSQL
+
+sudo apt install postgresql postgresql-contrib
+
+
+
+Step 3: Check PostgreSQL Instance/Service status
+
+
+sudo systemctl status postgresql.service
+
+
+sudo systemctl start postgresql.service
+sudo systemctl stop postgresql.service
+
+
+Step 4: Using PostgreSQL Roles and Databases
+
+
+Switch over to the postgres account
+
+sudo -i -u postgres
+
+Access the PostgreSQL prompt 
+
+psql
+
+Exit out of the PostgreSQL prompt using below command
+
+\q
+
+Accessing a Postgres Prompt Without Switching Accounts
+
+sudo -u postgres psql
+
+\l
+
+\q
+
+Step 5: Creating a New Role
+
+sudo -u postgres createuser --interactive
+
+Choose user/role name
+
+Choose whether user to be superuser
+
+
+
+Creating a New Database
+
+sudo -u postgres createdb testdb
+
+
+Opening a Postgres Prompt with the New Role
+
+sudo adduser testuser [do this step if created new role is different from logged-in user]
+
+sudo -i -u testuser
+
+psql
+
+
+psql -d testdb
+
+
+or
+
+sudo -u testuser psql -d testdb
+
+
+
+If you want your user to connect to a different database, you can do so by specifying the database like this:
+
+psql -d postgres
+
+\conninfo
+
+\q
+
+
+
+Password change:
+
+sudo passwd postgres
+
+
+su - postgres
+
+
+psql -c "ALTER USER postgres WITH PASSWORD 'datamaking';"
+
+exit
+

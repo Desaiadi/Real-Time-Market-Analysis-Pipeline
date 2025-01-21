@@ -1,0 +1,41 @@
+Install Anaconda Python on Ubuntu:
+==================================
+
+Step 1: Download the Anaconda Python installer
+
+
+Url: 
+
+https://www.anaconda.com/download
+
+
+Anaconda Python installer file name: 
+
+https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+
+
+pwd
+
+wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+
+/home/datamaking
+
+mv Anaconda3-2023.09-0-Linux-x86_64.sh /home/datamaking/workarea/software/
+
+
+Step 2: Install Anaconda Python
+
+ls
+
+bash Anaconda3-2023.09-0-Linux-x86_64.sh
+
+
+Step 3: Verify the Python version
+
+python --version
+
+
+
+conda --version
+
+

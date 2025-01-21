@@ -1,0 +1,41 @@
+Install Java 8(OpenJDK) on Ubuntu:
+==================================
+
+Step 1: Update the repositories
+
+sudo apt-get update
+
+
+Step 2: Install Java 8(OpenJDK)
+
+sudo apt-get install openjdk-8-jdk
+
+
+Step 3: Verify the version of the JDK
+
+java -version
+
+
+Step 4: Set the JAVA_HOME environment variable
+
+
+ls /usr/lib/jvm/java-8-openjdk-amd64
+
+
+sudo nano ~/.bashrc
+
+or
+
+sudo nano /home/datamaking/.bashrc
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+
+
+source ~/.bashrc
+
+
+Verify the java version,
+
+java -version
+

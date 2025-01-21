@@ -1,0 +1,132 @@
+Install Apache Spark on Ubuntu:
+===============================
+
+Step 1: Prerequisite
+
+
+i) Java 8(OpenJDK)+ to be installed and set the JAVA_HOME environment variable in /home/datamaking/.bashrc file
+
+echo $JAVA_HOME
+
+To verify the java version you can use the following command:
+
+java -version
+
+ii) Anaconda Python or classic(open source) Python 3.7+ to be installed
+
+python --version
+
+ls /home/datamaking/anaconda3
+
+
+Step 2: Install Scala and sbt
+
+
+https://www.scala-lang.org/download/2.12.18.html
+
+pwd
+
+wget https://downloads.lightbend.com/scala/2.12.18/scala-2.12.18.tgz
+
+ls 
+
+scala-2.12.18.tgz
+
+
+mv scala-2.12.18.tgz /home/datamaking/workarea/software/
+
+
+cd /home/datamaking/workarea/software/
+
+tar -xvzf scala-2.12.18.tgz
+
+nano ~/.bashrc
+ 
+
+export SCALA_HOME=/home/datamaking/workarea/software/scala-2.12.18
+export PATH=$PATH:$SCALA_HOME/bin
+
+source ~/.bashrc
+
+
+pwd
+
+
+https://www.scala-sbt.org/download.html
+
+
+wget https://github.com/sbt/sbt/releases/download/v1.9.6/sbt-1.9.6.tgz
+
+ls
+
+sbt-1.9.6.tgz
+
+
+mv sbt-1.9.6.tgz /home/datamaking/workarea/software/
+
+
+cd /home/datamaking/workarea/software/
+
+tar -xvzf sbt-1.9.6.tgz
+
+
+nano ~/.bashrc
+
+export SBT_HOME=/home/datamaking/workarea/software/sbt
+export PATH=$PATH:$SBT_HOME/bin
+
+source ~/.bashrc
+
+
+
+Step 3: Install Apache Spark
+
+pwd
+
+Download the latest version of the Apache Spark from its official website.
+
+https://spark.apache.org/downloads.html
+
+
+https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+
+
+wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+
+
+ls
+
+mv spark-3.5.0-bin-hadoop3.tgz /home/datamaking/workarea/software/
+
+cd /home/datamaking/workarea/software/
+ 
+tar -xvzf spark-3.5.0-bin-hadoop3.tgz
+
+
+Add the SPARK_HOME path in the bash file (.bashrc)
+
+
+nano ~/.bashrc
+
+export SPARK_HOME=/home/datamaking/workarea/software/spark-3.5.0-bin-hadoop3
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+
+source ~/.bashrc
+
+
+Step 4: Verify Apache Spark Installation
+
+
+spark-submit --version
+
+
+spark-shell
+
+
+pyspark
+
+
+sparkR
+
+

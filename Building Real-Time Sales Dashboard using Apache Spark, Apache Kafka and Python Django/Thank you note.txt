@@ -1,0 +1,27 @@
+Welcome to the course "Building Real-Time Sales Dashboard using Apache Spark, Apache Kafka and Python Django". 
+
+Please join the Telegram Group: https://t.me/+uISEPVLP64BlMTc1 for any doubts or queries on this project. 
+
+Lets get started. Happy Learning !!!
+
+Step 1: Download a compressed file
+
+course_download.zip
+
+Step 2: Uncompress the above file using unzip utility or any other supporting utility
+
+unzip course_download.zip
+
+Step 3: Navigate to the root of folder case study project
+
+course_download/ecom-real-time-case-stud
+
+Step 4: Go through the README.md file to proceed next steps
+
+Contact Us
+
+Email: datamaking.training@gmail.com
+Website: https://www.datamaking.com
+WhatsApp: +91 6380745611
+YouTube: https://www.youtube.com/c/datamaking
+LinkedIn: https://www.linkedin.com/in/parimargu
